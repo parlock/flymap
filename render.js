@@ -1,7 +1,7 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, BrowserWindow, remote } = require('electron');
 
 // all the map rendering code on the renderer side
-  
+
 // You can remove the following line if you don't need support for RTL (right-to-left) labels:
 mapboxgl.setRTLTextPlugin('https://cdn.maptiler.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.2/mapbox-gl-rtl-text.js');
 
@@ -76,3 +76,47 @@ btnTheme.addEventListener('click', function() {
     var theme = this.getAttribute('class');
     ipcRenderer.send('themechange', theme);
 });
+
+/* handle window titlebar controls */
+document.getElementById("min-btn").addEventListener("click", function (e) {
+    var window = remote.BrowserWindow.getFocusedWindow();
+    window.minimize(); 
+});
+
+document.getElementById("max-btn").addEventListener("click", function (e) {
+    var window = remote.BrowserWindow.getFocusedWindow();
+    if (window.isMaximized()) {
+        window.restore();
+    } else {
+        window.maximize(); 
+    }
+});
+
+document.getElementById("close-btn").addEventListener("click", function (e) {
+    var window = remote.BrowserWindow.getFocusedWindow();
+    window.close();
+});
+
+remote.BrowserWindow.getFocusedWindow().on('maximize', () => {
+    document.getElementById('max-text').setAttribute('style', 'display: none;');
+    document.getElementById('restore-text').setAttribute('style', 'display: block;');
+});
+
+remote.BrowserWindow.getFocusedWindow().on('unmaximize', () => {
+    document.getElementById('max-text').setAttribute('style', 'display: block;');
+    document.getElementById('restore-text').setAttribute('style', 'display: none;');
+});
+
+/* set window state */
+
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        if (remote.BrowserWindow.getFocusedWindow().isMaximized()) {
+            document.getElementById('max-text').setAttribute('style', 'display: none;');
+            document.getElementById('restore-text').setAttribute('style', 'display: block;');
+        } else {
+            document.getElementById('max-text').setAttribute('style', 'display: block;');
+            document.getElementById('restore-text').setAttribute('style', 'display: none;');
+        }
+    }
+};

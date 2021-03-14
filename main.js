@@ -24,9 +24,11 @@ app.on('ready', () => {
       title: 'Fly Map',
       width: width, 
       height: height,
+      frame: false,
       webPreferences: { 
         contextIsolation: false,
-        nodeIntegration: true
+        nodeIntegration: true,
+        enableRemoteModule: true
        }
     });
 
