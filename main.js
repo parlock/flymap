@@ -28,7 +28,8 @@ app.on('ready', () => {
       webPreferences: { 
         contextIsolation: false,
         nodeIntegration: true,
-        enableRemoteModule: true
+        enableRemoteModule: true,
+        plugins: true
        }
     });
 

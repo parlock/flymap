@@ -1,8 +1,8 @@
 {
   "bearing": 0,
   "center": [
-    -117.18649268859349,
-    32.73301175642048
+    -118.40590635860326,
+    33.93980678495764
   ],
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=6SdfQgCg5z80NSlROQlb",
   "id": "95ea89a2-0e85-41d2-b89c-e597cc4a1a35",
@@ -777,7 +777,7 @@
       ],
       "id": "aeroway_taxiway",
       "layout": {
-        "line-cap": "round",
+        "line-cap": "square",
         "line-join": "round",
         "visibility": "visible"
       },
@@ -802,7 +802,7 @@
           12,
           2,
           15,
-          10,
+          25,
           20,
           150
         ]
@@ -831,7 +831,7 @@
       },
       "minzoom": 12,
       "paint": {
-        "line-color": "rgba(139, 139, 138, 1)",
+        "line-color": "rgba(251, 234, 2, 1)",
         "line-opacity": 1,
         "line-width": 2
       },
@@ -850,7 +850,7 @@
       ],
       "id": "aeroway_runway",
       "layout": {
-        "line-cap": "round",
+        "line-cap": "square",
         "line-join": "round",
         "visibility": "visible"
       },
@@ -886,7 +886,7 @@
           12,
           2,
           15,
-          10,
+          25,
           20,
           150
         ]
@@ -937,6 +937,85 @@
       "source": "openmaptiles",
       "source-layer": "aeroway",
       "type": "line"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "taxiway"
+        ]
+      ],
+      "id": "taxiway_numbers",
+      "layout": {
+        "text-field": "{ref}",
+        "text-font": [
+          "Roboto Medium",
+          "Noto Sans Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              17,
+              12
+            ],
+            [
+              19,
+              10
+            ]
+          ]
+        }
+      },
+      "minzoom": 12,
+      "paint": {
+        "text-color": "#242424",
+        "text-halo-color": "#fff",
+        "text-halo-width": 1.2
+      },
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "type": "symbol"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "runway"
+        ]
+      ],
+      "id": "runway_numbers",
+      "layout": {
+        "text-field": "{ref}",
+        "text-font": [
+          "Roboto Medium",
+          "Noto Sans Regular"
+        ],
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          17,
+          12,
+          19,
+          10
+        ]
+      },
+      "minzoom": 12,
+      "paint": {
+        "text-color": "#242424",
+        "text-halo-color": "#fff",
+        "text-halo-width": 1.2
+      },
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "type": "symbol"
     },
     {
       "filter": [
@@ -5426,204 +5505,6 @@
       "filter": [
         "all",
         [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          ">=",
-          "rank",
-          20
-        ],
-        [
-          "none",
-          [
-            "all",
-            [
-              "in",
-              "class",
-              "pitch"
-            ],
-            [
-              "in",
-              "subclass",
-              "soccer",
-              "tennis",
-              "baseball",
-              "basketball",
-              "swimming",
-              "golf"
-            ]
-          ]
-        ],
-        [
-          "any",
-          [
-            "!has",
-            "level"
-          ],
-          [
-            "==",
-            "level",
-            0
-          ]
-        ]
-      ],
-      "id": "poi_z16",
-      "layout": {
-        "icon-image": "{class}_11",
-        "text-anchor": "top",
-        "text-field": "{name:latin}\n{name:nonlatin}",
-        "text-font": [
-          "Roboto Condensed Italic",
-          "Noto Sans Italic"
-        ],
-        "text-max-width": 9,
-        "text-offset": [
-          0,
-          0.6
-        ],
-        "text-padding": 2,
-        "text-size": 12,
-        "visibility": "visible"
-      },
-      "metadata": {},
-      "minzoom": 16,
-      "paint": {
-        "text-color": "#666",
-        "text-halo-blur": 0.5,
-        "text-halo-color": "#ffffff",
-        "text-halo-width": 1
-      },
-      "source": "openmaptiles",
-      "source-layer": "poi",
-      "type": "symbol"
-    },
-    {
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          ">=",
-          "rank",
-          7
-        ],
-        [
-          "<",
-          "rank",
-          20
-        ],
-        [
-          "any",
-          [
-            "!has",
-            "level"
-          ],
-          [
-            "==",
-            "level",
-            0
-          ]
-        ]
-      ],
-      "id": "poi_z15",
-      "layout": {
-        "icon-image": "{class}_11",
-        "text-anchor": "top",
-        "text-field": "{name:latin}\n{name:nonlatin}",
-        "text-font": [
-          "Roboto Condensed Italic",
-          "Noto Sans Italic"
-        ],
-        "text-max-width": 9,
-        "text-offset": [
-          0,
-          0.6
-        ],
-        "text-padding": 2,
-        "text-size": 12,
-        "visibility": "visible"
-      },
-      "metadata": {},
-      "minzoom": 15,
-      "paint": {
-        "text-color": "#666",
-        "text-halo-blur": 0.5,
-        "text-halo-color": "#ffffff",
-        "text-halo-width": 1
-      },
-      "source": "openmaptiles",
-      "source-layer": "poi",
-      "type": "symbol"
-    },
-    {
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "any",
-          [
-            "<",
-            "rank",
-            7
-          ]
-        ],
-        [
-          "any",
-          [
-            "!has",
-            "level"
-          ],
-          [
-            "==",
-            "level",
-            0
-          ]
-        ]
-      ],
-      "id": "poi_z14",
-      "layout": {
-        "icon-image": "{class}_11",
-        "icon-size": 0.9,
-        "text-anchor": "top",
-        "text-field": "{name:latin}\n{name:nonlatin}",
-        "text-font": [
-          "Roboto Condensed Italic",
-          "Noto Sans Italic"
-        ],
-        "text-max-width": 9,
-        "text-offset": [
-          0,
-          0.6
-        ],
-        "text-padding": 2,
-        "text-size": 12,
-        "visibility": "visible"
-      },
-      "metadata": {},
-      "minzoom": 14.2,
-      "paint": {
-        "text-color": "#666",
-        "text-halo-blur": 0.5,
-        "text-halo-color": "#ffffff",
-        "text-halo-width": 1
-      },
-      "source": "openmaptiles",
-      "source-layer": "poi",
-      "type": "symbol"
-    },
-    {
-      "filter": [
-        "all",
-        [
           "in",
           "class",
           "bus",
@@ -5986,7 +5867,6 @@
       ],
       "id": "airport-label-major",
       "layout": {
-        "icon-image": "airport_11",
         "icon-size": 1,
         "text-anchor": "top",
         "text-field": "{name:latin}\n{name:nonlatin}",
@@ -6041,12 +5921,11 @@
               10
             ]
           ]
-         }
+        }
       },
       "minzoom": 12,
       "paint": {
-        "text-color": "rgba(135, 135, 135, 1)",
-        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "#242424",
         "text-halo-width": 1.5
       },
       "source": "openmaptiles",
@@ -6609,7 +6488,7 @@
       "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=6SdfQgCg5z80NSlROQlb"
     }
   },
-  "sprite": "https://api.maptiler.com/maps/95ea89a2-0e85-41d2-b89c-e597cc4a1a35/sprite",
+  "sprite": "https://cloud.maptiler.com/api/sprites/aa7d736d-f241-46fd-8323-6f1eaec313c1",
   "version": 8,
-  "zoom": 15.529114573675043
+  "zoom": 13.94475990960371
 }

@@ -1,8 +1,8 @@
 {
   "bearing": 0,
   "center": [
-    -118.45935263140359,
-    35.49337666091475
+    -118.40285430745394,
+    33.942019115229485
   ],
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=6SdfQgCg5z80NSlROQlb",
   "id": "a5cd13f6-a8dc-49a7-aecb-d2d03b330a44",
@@ -742,7 +742,7 @@
       ],
       "id": "aeroway_taxiway",
       "layout": {
-        "line-cap": "round",
+        "line-cap": "square",
         "line-join": "round",
         "visibility": "visible"
       },
@@ -903,6 +903,85 @@
       "source": "openmaptiles",
       "source-layer": "aeroway",
       "type": "line"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "taxiway"
+        ]
+      ],
+      "id": "taxiway_numbers",
+      "layout": {
+        "text-field": "{ref}",
+        "text-font": [
+          "Roboto Medium",
+          "Noto Sans Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              17,
+              12
+            ],
+            [
+              19,
+              10
+            ]
+          ]
+        }
+      },
+      "minzoom": 12,
+      "paint": {
+        "text-color": "#e6e6e6",
+        "text-halo-color": "#242424",
+        "text-halo-width": 1.5
+      },
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "type": "symbol"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "runway"
+        ]
+      ],
+      "id": "runway_numbers",
+      "layout": {
+        "text-field": "{ref}",
+        "text-font": [
+          "Roboto Medium",
+          "Noto Sans Regular"
+        ],
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          17,
+          12,
+          19,
+          10
+        ]
+      },
+      "minzoom": 12,
+      "paint": {
+        "text-color": "#e6e6e6",
+        "text-halo-color": "#242424",
+        "text-halo-width": 1.5
+      },
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "type": "symbol"
     },
     {
       "filter": [
@@ -6356,7 +6435,7 @@
       "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=6SdfQgCg5z80NSlROQlb"
     }
   },
-  "sprite": "https://api.maptiler.com/maps/a5cd13f6-a8dc-49a7-aecb-d2d03b330a44/sprite",
+  "sprite": "https://cloud.maptiler.com/api/sprites/aa7d736d-f241-46fd-8323-6f1eaec313c1",
   "version": 8,
-  "zoom": 7.88000843565539
+  "zoom": 14.355616130891057
 }
