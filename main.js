@@ -5,7 +5,8 @@ const Store = require('./utils/store.js');
 const store = new Store({
   configName: 'flymap-user-preferences',
   defaults: {
-    windowBounds: { width: 1280, height: 800 },
+    windowBounds: { x:0, y:0, width: 1280, height: 800 },
+    maximized: false,
     theme: 'light',
     position: { lat: 32.73273, lng: -117.19246 },
     zoom: 14.48
@@ -17,14 +18,18 @@ let mainWindow;
 app.on('ready', () => {
 
   // get window size
-  let { width, height } = store.get('windowBounds');
+  let mainBounds = store.get('windowBounds');
 
   // once electron has started up, create a window.
   mainWindow = new BrowserWindow({ 
       title: 'Fly Map',
-      width: width, 
-      height: height,
+      x: mainBounds.x,
+      y: mainBounds.y,
+      width: mainBounds.width,
+      height: mainBounds.height,
       frame: false,
+      show: false,
+      paintWhenInitiallyHidden: true,
       webPreferences: { 
         contextIsolation: false,
         nodeIntegration: true,
@@ -33,17 +38,38 @@ app.on('ready', () => {
        }
     });
 
+  /* restore maximize if previously */
+  let maximized = store.get('maximized');
+  if (maximized) {
+    mainWindow.maximize();
+  }
+
   // hide the default menu bar that comes with the browser window
   mainWindow.setMenuBarVisibility(null);
+
+  /* delay for window state */
+  mainWindow.show();
 
   // mainWindow.webContents.openDevTools();
 
   // save window size
-  mainWindow.on('resize', () => {
-    let { width, height } = mainWindow.getBounds();
+  mainWindow.on('resized', () => {
+    let saveBounds = mainWindow.getBounds();
 
-    store.set('windowBounds', { width, height });
+    store.set('windowBounds', saveBounds);
   });
+  mainWindow.on('moved', () => {
+    let saveBounds = mainWindow.getBounds();
+
+    store.set('windowBounds', saveBounds);
+  });
+  mainWindow.on('maximize', () => {
+    store.set('maximized', true);
+  });
+  mainWindow.on('unmaximize', () => {
+    store.set('maximized', false);
+  });
+
 
   // theme changed by user
   ipcMain.on('themechange', (event,arg) => {
