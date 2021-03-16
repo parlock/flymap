@@ -32,6 +32,7 @@ body {
 }
 
 #searchbox {
+    position: relative;
     float: left;
     width: 250px;
     padding: 0 20px 17px 15px;
@@ -51,12 +52,61 @@ body {
 
 #searchbox input {
     width: 100%;
+    cursor: text;
+}
+#searchbox input:focus {
+    cursor: text;
+}
+#clearsearch {
+    position: absolute;
+    right: 4px;
+    top: 1px;
+    background-color: #fff !important;
+    color: #000 !important;
+    margin: 0;
+    padding: 0 !important;
+    height: 19px;
+    width: 13px;
+    cursor: pointer;
 }
 
 ::placeholder {
     color: #aaa;
 }
 
+#searchresults {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    bottom: 0;
+    background-color: #000;
+    display: none;
+    width: 300px;
+    z-index: 3;
+}
+
+#searchresults .result {
+    background-color: #484848;
+    height: 40px;
+    padding: 5px;
+    color: #fff;
+    margin: 5px 10px;
+    font-family: Muli, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#searchresults .result .name {
+    width: 270px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#searchresults .result .ident {
+    color: #777;
+}
 
 #settings {
     display: block;

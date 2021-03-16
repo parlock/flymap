@@ -3,6 +3,74 @@ const { ipcRenderer, BrowserWindow, remote } = require('electron');
 // all the map rendering code on the renderer side
 
 var airports = [];
+var hasAirports = false;
+const searchVal = document.getElementById('searchval');
+
+searchVal.addEventListener('keyup', function(event) {
+    if (hasAirports && event.key === 'Enter') {
+        /* do search */
+        var valSearch = document.getElementById('searchval').value;
+        var resultsBox = document.getElementById('searchresults');
+
+        /* clear results */
+        resultsBox.innerHTML = '';
+
+        var idents = airports.filter(a => a.ident.toLowerCase().includes(valSearch));
+        var iata = airports.filter(a => a.iata_code.toLowerCase().includes(valSearch));
+        var names = airports.filter(a => a.name.toLowerCase().includes(valSearch));
+        var results = [].concat(idents, iata, names);
+
+        /* get up to 10 results */
+        var final = results.slice(0, (results.length > 10 ? 10 : results.length))
+
+        /* create results list */
+        final.forEach(r => {
+            var el = document.createElement('div');
+            el.className = 'result';
+            el.innerHTML = '<span class="name">' + r.name + '</span><br/><span class="ident">' + r.ident + (r.iata_code !== '' ? '/' + r.iata_code + '</span>' : '');
+            el.setAttribute('data-lat', r.latitude_deg);
+            el.setAttribute('data-lng', r.longitude_deg);
+            resultsBox.append(el);
+        });
+
+        document.querySelectorAll('#searchresults .result').forEach(r => {
+            r.addEventListener('click', function() {
+                /* change map center to this airport */
+                var lat = r.getAttribute('data-lat');
+                var lng = r.getAttribute('data-lng');
+                map.setCenter({ 'lat': lat, 'lng': lng });
+                map.setZoom(14);
+    
+                /* hide results */
+                resultsBox.setAttribute('style', 'display: none;');
+                searchVal.value = '';
+
+                /* save new location */
+                var center = { lat: map.getCenter().lat, lng: map.getCenter().lng };
+
+                ipcRenderer.send('positionchange', center);
+            
+                /* save zoom as it might change when panning */
+                var zoom = map.getZoom();
+            
+                ipcRenderer.send('zoomchange', zoom);
+            });
+        });
+
+        /* show results box */
+        resultsBox.setAttribute('style', 'display: block;');
+    }
+});
+
+/* clear search results */
+document.getElementById('clearsearch').addEventListener('click', function() {
+    var valSearch = document.getElementById('searchval').value;
+    var resultsBox = document.getElementById('searchresults');
+
+    /* hide results */
+    resultsBox.setAttribute('style', 'display: none;');
+    searchVal.value = '';
+});
 
 // You can remove the following line if you don't need support for RTL (right-to-left) labels:
 mapboxgl.setRTLTextPlugin('https://cdn.maptiler.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.2/mapbox-gl-rtl-text.js');
@@ -155,4 +223,7 @@ ipcRenderer.on('airportdata', (event, arg) => {
             .setLngLat([element.longitude_deg, element.latitude_deg])
             .addTo(map);
     });
+
+    /* turn on search */
+    hasAirports = true;
 });
