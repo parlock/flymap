@@ -5,9 +5,9 @@ const fs = require('fs');
 // this is for airports data on the disk
 class AirportsDB {
     constructor() {
-        const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+        const userAppPath = (electron.app || electron.remote.app).getAppPath();
 
-        this.path = path.join('assets/airports.json');
+        this.path = path.join(userAppPath, 'assets/airports.json');
         this.data = parseDataFile(this.path);
     }
 

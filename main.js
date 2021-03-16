@@ -30,6 +30,7 @@ app.on('ready', () => {
         y: mainBounds.y,
         width: mainBounds.width,
         height: mainBounds.height,
+        backgroundColor: '#191a1a',
         frame: false,
         show: false,
         paintWhenInitiallyHidden: true,

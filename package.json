@@ -4,12 +4,16 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "package": "electron-packager . FlyingMap --platform=win32 --arch=x64 --overwrite"
   },
   "private": true,
   "author": "Mark Walter",
   "license": "GPL3",
   "devDependencies": {
     "electron": "^12.0.1"
+  },
+  "dependencies": {
+    "electron-packager": "^15.2.0"
   }
 }
