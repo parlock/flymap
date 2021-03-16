@@ -2,6 +2,8 @@ const { ipcRenderer, BrowserWindow, remote } = require('electron');
 
 // all the map rendering code on the renderer side
 
+var airports = [];
+
 // You can remove the following line if you don't need support for RTL (right-to-left) labels:
 mapboxgl.setRTLTextPlugin('https://cdn.maptiler.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.2/mapbox-gl-rtl-text.js');
 
@@ -134,6 +136,10 @@ document.onreadystatechange = function() {
 };
 
 ipcRenderer.on('airportdata', (event, arg) => {
+    /* store for searching later */
+    airports = arg;
+
+    /* process airport markers on map */
     arg.filter(a => a.type === 'large_airport' && !a.name.includes('Base') && !a.name.includes('Regional')).forEach(element => {
         var el = document.createElement('div');
         el.className = 'airport';
