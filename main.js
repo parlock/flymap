@@ -73,6 +73,12 @@ app.on('ready', () => {
         store.set('maximized', false);
     });
 
+    // make web links open in default browser
+    mainWindow.webContents.on('new-window', function(e, url) {
+        e.preventDefault();
+        require('electron').shell.openExternal(url);
+    });
+
     // theme changed by user
     ipcMain.on('themechange', (event, arg) => {
         store.set('theme', arg);

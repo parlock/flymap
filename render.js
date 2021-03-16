@@ -30,15 +30,23 @@ var map = new mapboxgl.Map({
     style: lightTheme,
     center: [-117.19246, 32.73273],
     zoom: 14.48,
-    minZoom: 3
+    minZoom: 3,
+    pitchWithRotate: false,
+    dragRotate: false
 });
 
+map.addControl(new mapboxgl.ScaleControl({
+    maxWidth: 80,
+    unit: 'metric'
+}));
 map.addControl(new mapboxgl.ScaleControl({
     maxWidth: 80,
     unit: 'imperial'
 }));
 
-map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+map.addControl(new mapboxgl.NavigationControl({
+    showCompass: false
+}), 'bottom-right');
 
 /* center changed */
 map.on('dragend', function() {
