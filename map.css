@@ -54,18 +54,19 @@ body {
     float: left;
     text-align: center;
     font-size: 20px;
-    padding: 5px 15px;
+    padding: 5px 15px 19px;
     cursor: pointer;
 }
 
-#nav ul li.active {
-    border-bottom: 2px solid purple;
+#navbar .active {
+    border-bottom: 2px solid #cc3399;
 }
 
 #settings {
     display: block;
     float: right;
-    margin: 20px 40px 15px 15px;
+    padding: 0 20px 18px 15px;
+    margin: 20px 10px 0;
     -webkit-app-region: no-drag;
 }
 
@@ -78,7 +79,8 @@ body {
 #theme {
     display: block;
     float: right;
-    margin: 20px 40px 15px 15px;
+    padding: 0 20px 18px 15px;
+    margin: 20px 10px 0;
     -webkit-app-region: no-drag;
 }
 
@@ -86,6 +88,30 @@ body {
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+#search {
+    display: block;
+    float: right;
+    padding: 0 20px 18px 15px;
+    margin: 20px 10px 0;
+    -webkit-app-region: no-drag;
+}
+
+#search img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#utctime {
+    display: block;
+    float: right;
+    padding: 0 20px 18px 12px;
+    margin: 23px 10px 0;
+    font-family: Muli, sans-serif;
+    font-size: 14px;
+    -webkit-app-region: no-drag;
 }
 
 #title-bar-btns {

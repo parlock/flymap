@@ -117,6 +117,18 @@ document.onreadystatechange = function() {
             document.getElementById('max-text').setAttribute('style', 'display: block !important;');
             document.getElementById('restore-text').setAttribute('style', 'display: none !important;');
         }
+
+        /* utc time */
+        var d = new Date();
+        var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + d.getUTCMinutes() + 'Z';
+        document.getElementById('utctime').innerText = n;
+    
+        window.setInterval(function() {
+            var d = new Date();
+            var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + d.getUTCMinutes() + 'Z';
+            document.getElementById('utctime').innerText = n;
+        }, 
+        1000);
     }
 };
 
