@@ -1,11 +1,11 @@
 {
-  "name": "mapapp",
-  "version": "1.0.0",
-  "description": "",
+  "name": "FlyMap",
+  "version": "0.2.0",
+  "description": "Flying Map app for planning and following your plane in MSFS 2020",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package": "electron-packager . FlyingMap --platform=win32 --arch=x64 --overwrite"
+    "package": "electron-packager . FlyMap --platform=win32 --arch=x64 --overwrite"
   },
   "private": true,
   "author": "Mark Walter",
