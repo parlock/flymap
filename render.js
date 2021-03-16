@@ -20,8 +20,8 @@ searchVal.addEventListener('keyup', function(event) {
         var names = airports.filter(a => a.name.toLowerCase().includes(valSearch));
         var results = [].concat(idents, iata, names);
 
-        /* get up to 10 results */
-        var final = results.slice(0, (results.length > 10 ? 10 : results.length))
+        /* get up to 12 results */
+        var final = results.slice(0, (results.length > 12 ? 12 : results.length))
 
         /* create results list */
         final.forEach(r => {
