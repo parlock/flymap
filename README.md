@@ -6,7 +6,6 @@ Work in progress.  But this will be a Electron JS app that connects to MSFS 2020
 ## TODO
 
 - Implement Simconnect for getting planes position
-- Import Airport/Runway data for overlay on openstreetmaps
 - Search for airports and charts
 - Simbrief integration for flight plan rendering on the map
 - More to come!

@@ -120,12 +120,12 @@ document.onreadystatechange = function() {
 
         /* utc time */
         var d = new Date();
-        var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + d.getUTCMinutes() + 'Z';
+        var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
         document.getElementById('utctime').innerText = n;
     
         window.setInterval(function() {
             var d = new Date();
-            var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + d.getUTCMinutes() + 'Z';
+            var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
             document.getElementById('utctime').innerText = n;
         }, 
         1000);
