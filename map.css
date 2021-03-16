@@ -141,7 +141,7 @@ body {
 }
 
 .airport {
-    background-image: url('assets/star.svg');
+    background-image: url('assets/airplane.svg');
     background-size: cover;
     width: 20px;
     height: 20px;
