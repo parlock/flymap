@@ -11,7 +11,6 @@
 
 <body>
     <div id="navbar">
-        <div id="logo">Fly Map</div>
         <div id="nav">
             <ul>
                 <li class="active">Map</li>
@@ -19,11 +18,18 @@
             </ul>
         </div>
         <div id="title-bar-btns"><button id="min-btn">&#xE921;</button><button id="max-btn"><span id="max-text">&#xE922;</span><span id="restore-text">&#xE923;</span></button><button id="close-btn">&#xE8BB;</button></div>
+        <div id="logo">Fly Map</div>
         <div id="settings"><img src="assets/settings.svg" /></div>
         <div id="theme"><img id="themebtn" src="assets/sun.svg" class="light"/></div>
-        <div id="search"><img id="searchbtn" src="assets/search.svg" /></div>
-        <div id="utctime"></div>
+
     </div>
+    <div id="searchbox">
+        <div>Search</div>
+        <input id="searchval" type="text" value="" placeholder="search airports..." />
+    </div>
+
+    <div id="utctime"></div>
+
     <div id="container">
         <div id="map"></div>
         <p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a
