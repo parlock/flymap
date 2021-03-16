@@ -9,6 +9,7 @@
   },
   "private": true,
   "author": "Mark Walter",
+  "copyright": "Copyright 2021, Mark Walter",
   "license": "GPL3",
   "devDependencies": {
     "electron": "^12.0.1"
