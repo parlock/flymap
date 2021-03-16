@@ -101,35 +101,35 @@ document.getElementById("close-btn").addEventListener("click", function(e) {
 /* set window state */
 document.onreadystatechange = function() {
     if (document.readyState == "complete") {
-        remote.BrowserWindow.getFocusedWindow().on('maximize', () => {
-            document.getElementById('max-text').setAttribute('style', 'display: none !important;');
-            document.getElementById('restore-text').setAttribute('style', 'display: block !important;');
-        });
-
-        remote.BrowserWindow.getFocusedWindow().on('unmaximize', () => {
-            document.getElementById('max-text').setAttribute('style', 'display: block !important;');
-            document.getElementById('restore-text').setAttribute('style', 'display: none !important;');
-        });
-
-        if (remote.BrowserWindow.getFocusedWindow().isMaximized()) {
-            document.getElementById('max-text').setAttribute('style', 'display: none !important;');
-            document.getElementById('restore-text').setAttribute('style', 'display: block !important;');
-        } else {
-            document.getElementById('max-text').setAttribute('style', 'display: block !important;');
-            document.getElementById('restore-text').setAttribute('style', 'display: none !important;');
-        }
-
         /* utc time */
         var d = new Date();
         var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
         document.getElementById('utctime').innerText = n;
     
         window.setInterval(function() {
-            var d = new Date();
-            var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
-            document.getElementById('utctime').innerText = n;
+                var d = new Date();
+                var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
+                document.getElementById('utctime').innerText = n;
         }, 
         1000);
+
+        remote.BrowserWindow.getFocusedWindow().on('maximize', () => {
+            document.getElementById('max-text').setAttribute('style', 'display: none;');
+            document.getElementById('restore-text').setAttribute('style', 'display: block;');
+        });
+
+        remote.BrowserWindow.getFocusedWindow().on('unmaximize', () => {
+            document.getElementById('max-text').setAttribute('style', 'display: block;');
+            document.getElementById('restore-text').setAttribute('style', 'display: none;');
+        });
+
+        if (remote.BrowserWindow.getFocusedWindow().isMaximized()) {
+            document.getElementById('max-text').setAttribute('style', 'display: none;');
+            document.getElementById('restore-text').setAttribute('style', 'display: block;');
+        } else {
+            document.getElementById('max-text').setAttribute('style', 'display: block;');
+            document.getElementById('restore-text').setAttribute('style', 'display: none;');
+        }
     }
 };
 

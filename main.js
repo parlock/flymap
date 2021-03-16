@@ -34,7 +34,7 @@ app.on('ready', () => {
         minHeight: 768,
         backgroundColor: '#191a1a',
         frame: false,
-        show: false,
+        show: true,
         paintWhenInitiallyHidden: true,
         webPreferences: {
             contextIsolation: false,
@@ -104,14 +104,14 @@ app.on('ready', () => {
     });
 
     mainWindow.on('ready-to-show', () => {
-        /* delay for window state */
-        mainWindow.show();
-
         /* restore maximize if previously */
         let maximized = store.get('maximized');
         if (maximized) {
             mainWindow.maximize();
         }
+
+        /* delay for window state */
+        mainWindow.show();
 
         // send airport data to renderer
         mainWindow.webContents.send('airportdata', airportsDB.get());

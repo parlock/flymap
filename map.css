@@ -96,6 +96,7 @@ body {
     top: 64px;
     right: 0;
     height: 20px;
+    min-width: 50px;
     display: block;
     padding: 5px;
     font-family: Muli, sans-serif;
@@ -170,6 +171,10 @@ body {
 
 #title-bar-btns #close-btn:hover {
     background-color: #E81123;
+}
+
+#title-bar-btns #restore-text {
+    display: none;
 }
 
 #container {
