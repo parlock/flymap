@@ -44,6 +44,12 @@ app.on('ready', () => {
         }
     });
 
+    /* restore maximize if previously */
+    let maximized = store.get('maximized');
+    if (maximized) {
+        mainWindow.maximize();
+    }
+
     // hide the default menu bar that comes with the browser window
     mainWindow.setMenuBarVisibility(null);
 
@@ -104,12 +110,6 @@ app.on('ready', () => {
     });
 
     mainWindow.on('ready-to-show', () => {
-        /* restore maximize if previously */
-        let maximized = store.get('maximized');
-        if (maximized) {
-            mainWindow.maximize();
-        }
-
         /* delay for window state */
         mainWindow.show();
 
