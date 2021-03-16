@@ -843,6 +843,45 @@
       "filter": [
         "all",
         [
+          "==",
+          "class",
+          "taxiway"
+        ]
+      ],
+      "id": "taxiway_numbers",
+      "layout": {
+        "text-field": "{ref}",
+        "text-font": [
+          "Roboto Medium",
+          "Noto Sans Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              17,
+              12
+            ],
+            [
+              19,
+              10
+            ]
+          ]
+        }
+      },
+      "minzoom": 12,
+      "paint": {
+        "text-color": "#242424",
+        "text-halo-color": "#fff",
+        "text-halo-width": 1.2
+      },
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "type": "symbol"
+    },
+    {
+      "filter": [
+        "all",
+        [
           "in",
           "class",
           "runway"
@@ -937,45 +976,6 @@
       "source": "openmaptiles",
       "source-layer": "aeroway",
       "type": "line"
-    },
-    {
-      "filter": [
-        "all",
-        [
-          "==",
-          "class",
-          "taxiway"
-        ]
-      ],
-      "id": "taxiway_numbers",
-      "layout": {
-        "text-field": "{ref}",
-        "text-font": [
-          "Roboto Medium",
-          "Noto Sans Regular"
-        ],
-        "text-size": {
-          "stops": [
-            [
-              17,
-              12
-            ],
-            [
-              19,
-              10
-            ]
-          ]
-        }
-      },
-      "minzoom": 12,
-      "paint": {
-        "text-color": "#242424",
-        "text-halo-color": "#fff",
-        "text-halo-width": 1.2
-      },
-      "source": "openmaptiles",
-      "source-layer": "aeroway",
-      "type": "symbol"
     },
     {
       "filter": [
