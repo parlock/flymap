@@ -14,16 +14,14 @@ class AirportsDB {
     get() {
         return this.data;
     }
-
-    get(ident) {
-        return this.data.filter(a => a.ident === ident);
-    }
 }
 
 function parseDataFile(filePath) {
     try {
         return JSON.parse(fs.readFileSync(filePath));
     } catch (error) {
+        console.log(error);
+
         return [];
     }
 }

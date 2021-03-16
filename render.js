@@ -78,45 +78,54 @@ btnTheme.addEventListener('click', function() {
 });
 
 /* handle window titlebar controls */
-document.getElementById("min-btn").addEventListener("click", function (e) {
+document.getElementById("min-btn").addEventListener("click", function(e) {
     var window = remote.BrowserWindow.getFocusedWindow();
-    window.minimize(); 
+    window.minimize();
 });
 
-document.getElementById("max-btn").addEventListener("click", function (e) {
+document.getElementById("max-btn").addEventListener("click", function(e) {
     var window = remote.BrowserWindow.getFocusedWindow();
     if (window.isMaximized()) {
         window.restore();
     } else {
-        window.maximize(); 
+        window.maximize();
     }
 });
 
-document.getElementById("close-btn").addEventListener("click", function (e) {
+document.getElementById("close-btn").addEventListener("click", function(e) {
     var window = remote.BrowserWindow.getFocusedWindow();
     window.close();
 });
 
-remote.BrowserWindow.getFocusedWindow().on('maximize', () => {
-    document.getElementById('max-text').setAttribute('style', 'display: none;');
-    document.getElementById('restore-text').setAttribute('style', 'display: block;');
-});
-
-remote.BrowserWindow.getFocusedWindow().on('unmaximize', () => {
-    document.getElementById('max-text').setAttribute('style', 'display: block;');
-    document.getElementById('restore-text').setAttribute('style', 'display: none;');
-});
-
 /* set window state */
-
-document.onreadystatechange = function () {
+document.onreadystatechange = function() {
     if (document.readyState == "complete") {
+        remote.BrowserWindow.getFocusedWindow().on('maximize', () => {
+            document.getElementById('max-text').setAttribute('style', 'display: none !important;');
+            document.getElementById('restore-text').setAttribute('style', 'display: block !important;');
+        });
+
+        remote.BrowserWindow.getFocusedWindow().on('unmaximize', () => {
+            document.getElementById('max-text').setAttribute('style', 'display: block !important;');
+            document.getElementById('restore-text').setAttribute('style', 'display: none !important;');
+        });
+
         if (remote.BrowserWindow.getFocusedWindow().isMaximized()) {
-            document.getElementById('max-text').setAttribute('style', 'display: none;');
-            document.getElementById('restore-text').setAttribute('style', 'display: block;');
+            document.getElementById('max-text').setAttribute('style', 'display: none !important;');
+            document.getElementById('restore-text').setAttribute('style', 'display: block !important;');
         } else {
-            document.getElementById('max-text').setAttribute('style', 'display: block;');
-            document.getElementById('restore-text').setAttribute('style', 'display: none;');
+            document.getElementById('max-text').setAttribute('style', 'display: block !important;');
+            document.getElementById('restore-text').setAttribute('style', 'display: none !important;');
         }
     }
 };
+
+ipcRenderer.on('airportdata', (event, arg) => {
+    arg.filter(a => a.iso_country === 'US' && a.type === 'large_airport').forEach(element => {
+        var el = document.createElement('div');
+        el.className = 'airport';
+        var marker = new mapboxgl.Marker(el)
+            .setLngLat([element.longitude_deg, element.latitude_deg])
+            .addTo(map);
+    });
+});

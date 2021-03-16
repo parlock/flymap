@@ -41,17 +41,8 @@ app.on('ready', () => {
         }
     });
 
-    /* restore maximize if previously */
-    let maximized = store.get('maximized');
-    if (maximized) {
-        mainWindow.maximize();
-    }
-
     // hide the default menu bar that comes with the browser window
     mainWindow.setMenuBarVisibility(null);
-
-    /* delay for window state */
-    mainWindow.show();
 
     // mainWindow.webContents.openDevTools();
 
@@ -72,7 +63,6 @@ app.on('ready', () => {
     mainWindow.on('unmaximize', () => {
         store.set('maximized', false);
     });
-
 
     // theme changed by user
     ipcMain.on('themechange', (event, arg) => {
@@ -108,6 +98,20 @@ app.on('ready', () => {
         let zoom = store.get('zoom');
 
         return zoom;
+    });
+
+    mainWindow.on('ready-to-show', () => {
+        /* delay for window state */
+        mainWindow.show();
+
+        /* restore maximize if previously */
+        let maximized = store.get('maximized');
+        if (maximized) {
+            mainWindow.maximize();
+        }
+
+        // send airport data to renderer
+        mainWindow.webContents.send('airportdata', airportsDB.get());
     });
 
     // load a website to display

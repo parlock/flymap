@@ -1,9 +1,11 @@
 body {
     background-color: #191a1a;
 }
+
 *:focus {
     outline: none;
 }
+
 #navbar {
     position: absolute;
     top: 0;
@@ -17,6 +19,7 @@ body {
     z-index: 2;
     -webkit-app-region: drag;
 }
+
 #logo {
     margin: 15px 50px;
     display: block;
@@ -24,16 +27,18 @@ body {
     font-size: 24px;
     cursor: pointer;
     -webkit-app-region: no-drag;
-    font-family: Muli,sans-serif;
+    font-family: Muli, sans-serif;
     text-transform: uppercase;
 }
+
 #nav {
     margin: 15px;
     display: block;
     float: left;
     -webkit-app-region: no-drag;
-    font-family: Muli,sans-serif;
+    font-family: Muli, sans-serif;
 }
+
 #nav ul {
     list-style: none;
     display: block;
@@ -42,6 +47,7 @@ body {
     padding: 0;
     margin: 0;
 }
+
 #nav ul li {
     display: block;
     position: relative;
@@ -51,37 +57,44 @@ body {
     padding: 5px 15px;
     cursor: pointer;
 }
+
 #nav ul li.active {
     border-bottom: 2px solid purple;
 }
+
 #settings {
     display: block;
     float: right;
     margin: 20px 40px 15px 15px;
     -webkit-app-region: no-drag;
 }
+
 #settings img {
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
+
 #theme {
     display: block;
     float: right;
     margin: 20px 40px 15px 15px;
     -webkit-app-region: no-drag;
 }
+
 #theme img {
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
+
 #title-bar-btns {
     display: block;
     float: right;
     margin: 0;
     -webkit-app-region: no-drag;
 }
+
 #title-bar-btns button {
     height: 64px;
     width: 50px;
@@ -98,12 +111,15 @@ body {
     font-size: 10px;
     cursor: pointer;
 }
+
 #title-bar-btns button:hover {
     background-color: #969696;
 }
+
 #title-bar-btns #close-btn:hover {
     background-color: #E81123;
 }
+
 #container {
     position: absolute;
     top: 64px;
@@ -113,6 +129,7 @@ body {
     background-color: #191a1a;
     border: none;
 }
+
 #map {
     position: absolute;
     top: 0;
@@ -121,4 +138,12 @@ body {
     left: 0;
     background-color: #191a1a;
     border: none;
+}
+
+.airport {
+    background-image: url('assets/star.svg');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
