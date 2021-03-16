@@ -121,7 +121,7 @@ document.onreadystatechange = function() {
 };
 
 ipcRenderer.on('airportdata', (event, arg) => {
-    arg.filter(a => a.type === 'large_airport' && !a.name.includes('Air Force Base') && !a.name.includes('Regional')).forEach(element => {
+    arg.filter(a => a.type === 'large_airport' && !a.name.includes('Base') && !a.name.includes('Regional')).forEach(element => {
         var el = document.createElement('div');
         el.className = 'airport';
         var marker = new mapboxgl.Marker(el)
