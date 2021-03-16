@@ -27,7 +27,8 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: lightTheme,
     center: [-117.19246, 32.73273],
-    zoom: 14.48
+    zoom: 14.48,
+    minZoom: 3
 });
 
 map.addControl(new mapboxgl.ScaleControl({

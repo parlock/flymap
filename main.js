@@ -30,6 +30,8 @@ app.on('ready', () => {
         y: mainBounds.y,
         width: mainBounds.width,
         height: mainBounds.height,
+        minWidth: 1280,
+        minHeight: 768,
         backgroundColor: '#191a1a',
         frame: false,
         show: false,
