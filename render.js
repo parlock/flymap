@@ -19,9 +19,15 @@ searchVal.addEventListener('keyup', function(event) {
         var iata = airports.filter(a => a.iata_code.toLowerCase().includes(valSearch));
         var names = airports.filter(a => a.name.toLowerCase().includes(valSearch));
         var results = [].concat(idents, iata, names);
+        var resultsdedup = [];
+        results.forEach(el => {
+            if(resultsdedup.filter(r => r.ident.toLowerCase().includes(el.ident.toLowerCase())).length == 0) {
+                resultsdedup.push(el);
+            }
+        });
 
         /* get up to 12 results */
-        var final = results.slice(0, (results.length > 12 ? 12 : results.length))
+        var final = resultsdedup.slice(0, (resultsdedup.length > 12 ? 12 : resultsdedup.length))
 
         /* create results list */
         final.forEach(r => {

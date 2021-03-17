@@ -53,7 +53,7 @@ app.on('ready', () => {
     // hide the default menu bar that comes with the browser window
     mainWindow.setMenuBarVisibility(null);
 
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     // save window size
     mainWindow.on('resized', () => {
