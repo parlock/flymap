@@ -150,6 +150,20 @@ body {
     cursor: pointer;
 }
 
+#plan {
+    display: block;
+    float: right;
+    padding: 0 5px 17px 5px;
+    margin: 24px 5px 0;
+    -webkit-app-region: no-drag;
+}
+
+#plan img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
 #utctime {
     position: absolute;
     top: 64px;
