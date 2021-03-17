@@ -9,7 +9,7 @@ const searchVal = document.getElementById('searchval');
 searchVal.addEventListener('keyup', function(event) {
     if (hasAirports && event.key === 'Enter') {
         /* do search */
-        var valSearch = document.getElementById('searchval').value;
+        var valSearch = document.getElementById('searchval').value.toLowerCase();
         var resultsBox = document.getElementById('searchresults');
 
         /* clear results */
@@ -221,6 +221,9 @@ ipcRenderer.on('airportdata', (event, arg) => {
     /* store for searching later */
     airports = arg;
 
+    /* turn on search */
+    hasAirports = true;
+
     /* process airport markers on map */
     arg.filter(a => a.type === 'large_airport' && !a.name.includes('Base') && !a.name.includes('Regional')).forEach(element => {
         var el = document.createElement('div');
@@ -238,7 +241,4 @@ ipcRenderer.on('airportdata', (event, arg) => {
         el.addEventListener('mouseenter', () => { if (!marker.getPopup().isOpen()) { marker.togglePopup(); } });
         el.addEventListener('mouseleave', () => { if (marker.getPopup().isOpen()) { marker.togglePopup(); } });
     });
-
-    /* turn on search */
-    hasAirports = true;
 });
