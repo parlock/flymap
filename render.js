@@ -225,9 +225,18 @@ ipcRenderer.on('airportdata', (event, arg) => {
     arg.filter(a => a.type === 'large_airport' && !a.name.includes('Base') && !a.name.includes('Regional')).forEach(element => {
         var el = document.createElement('div');
         el.className = 'airport';
+        var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false,
+            closeOnMove: true,
+            focusAfterOpen: false
+        }).setHTML('<h4>' + element.name + '</h4><h2>' + element.ident + (element.iata_code !== '' ? '/' + element.iata_code : '') + '</h2>');
         var marker = new mapboxgl.Marker(el)
             .setLngLat([element.longitude_deg, element.latitude_deg])
-            .addTo(map);
+            .addTo(map)
+            .setPopup(popup);
+        el.addEventListener('mouseenter', () => { if (!marker.getPopup().isOpen()) { marker.togglePopup(); } });
+        el.addEventListener('mouseleave', () => { if (marker.getPopup().isOpen()) { marker.togglePopup(); } });
     });
 
     /* turn on search */

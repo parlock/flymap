@@ -245,3 +245,42 @@ body {
     height: 20px;
     cursor: pointer;
 }
+
+.mapboxgl-popup-content {
+    border: 1px solid #363636;
+    border-radius: 4px;
+    color: #fff;
+    background-color: rgba(52, 52, 52, 0.9);
+}
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: rgba(52, 52, 52, 0.9) !important;
+}
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: rgba(52, 52, 52, 0.9) !important;
+}
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: rgba(52, 52, 52, 0.9) !important;
+}
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: rgba(52, 52, 52, 0.9) !important;
+}
+.mapboxgl-popup-content h4 {
+    font-family: "Segoe MDL2 Assets";
+    font-size: 16px;
+    margin: 0;
+    padding-bottom: 5px;
+    font-weight: normal;
+    width: 220px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+.mapboxgl-popup-content h2 {
+    font-family: "Segoe MDL2 Assets";
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+}
