@@ -11,7 +11,7 @@ body {
     top: 0;
     right: 0;
     left: 0;
-    background-color: #000;
+    background-color: #343434;
     color: #fff;
     height: 64px;
     padding: 0;
@@ -45,7 +45,7 @@ body {
     padding: 10px 10px 5px 0;
     font-family: Muli, sans-serif;
     font-size: 14px;
-    background-color: #000;
+    background-color: #545454;
     color: #fff;
     -webkit-user-select: none; 
 }
@@ -59,13 +59,13 @@ body {
 }
 #clearsearch {
     position: absolute;
-    right: 4px;
-    top: 1px;
+    right: 15px;
+    top: 3px;
     background-color: #fff !important;
     color: #000 !important;
     margin: 0;
     padding: 0 !important;
-    height: 19px;
+    height: 14px;
     width: 13px;
     cursor: pointer;
 }
@@ -79,7 +79,7 @@ body {
     top: 64px;
     left: 0;
     bottom: 0;
-    background-color: #000;
+    background-color: #545454;
     display: none;
     width: 300px;
     z-index: 3;
