@@ -14,15 +14,17 @@
     <div id="navbar">
         <div id="search"><img src="assets/search.svg" /></div>
         <div id="searchbox">
-            <input id="searchval" type="text" value="" placeholder="search airports..."><div id="clearsearch" title="clear search">X</div></input>
+            <input id="searchval" type="text" value="" placeholder="search airports...">
+            <div id="clearsearch" title="clear search">X</div>
+            </input>
         </div>
 
         <div id="title-bar-btns"><button id="min-btn">&#xE921;</button><button id="max-btn"><span id="max-text">&#xE922;</span><span id="restore-text">&#xE923;</span></button><button id="close-btn">&#xE8BB;</button></div>
         <div id="logo">Fly Map</div>
         <div id="settings"><img src="assets/settings.svg" /></div>
-        <div id="theme"><img id="themebtn" src="assets/sun.svg" class="light"/></div>
-        <div id="simconnect"><img id="simconnectbtn" src="assets/compass.svg" class="notconnected"/></div>
-        <div id="plan"><img id="planbtn" src="assets/map.svg"/></div>
+        <div id="theme"><img id="themebtn" src="assets/sun.svg" class="light" /></div>
+        <div id="simconnect"><img id="simconnectbtn" src="assets/compass.svg" class="notconnected" /></div>
+        <div id="plan"><img id="planbtn" src="assets/map.svg" /></div>
 
     </div>
 
@@ -32,13 +34,17 @@
 
     <div id="container">
         <div id="map"></div>
-        <p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a
-                href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></p>
+        <p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></p>
 
         <div id="settingsdialog">
             <div class="close"><button id="settingsclose">&#xE8BB;</button></div>
             <h4>Settings</h4>
             <p>Simbrief User ID: <input type="text" id="simbriefid" value="" /></p>
+        </div>
+
+        <div id="flightplandialog">
+            <div class="close"><button id="flightplanclose">&#xE8BB;</button></div>
+            <button id="importsimbrief">Import from Simbrief</button>
         </div>
     </div>
 

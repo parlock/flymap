@@ -267,6 +267,14 @@ body {
     cursor: pointer;
 }
 
+.waypoint {
+    background-image: url('assets/diamond-symbol.svg');
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
 .mapboxgl-popup-content {
     border: 1px solid #363636;
     border-radius: 4px;
@@ -361,6 +369,51 @@ body {
 }
 
 #settingsdialog .close button {
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    font-family: "MDL2";
+    font-size: 10px;
+    cursor: pointer;
+}
+
+#flightplandialog {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    width: 300px;
+    height: 600px;
+    background-color: #343434;
+    z-index: 5;
+    color: #fff;
+    padding: 30px 50px;
+    font-size: 18px;
+    cursor: default;
+    font-family: Muli, sans-serif;
+    font-weight: normal;
+    border-top: 1px solid #666;
+}
+
+#flightplandialog .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    border-radius: 150px;
+    border: 1px solid #fff;
+    padding: 0;
+    margin: 0;
+}
+
+#flightplandialog .close button {
     height: 30px;
     width: 30px;
     background-color: transparent;

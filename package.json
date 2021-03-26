@@ -17,6 +17,6 @@
   "dependencies": {
     "electron-packager": "^15.2.0",
     "electron-rebuild": "^2.3.5",
-    "fast-xml-parser": "^3.19.0"
+    "xml2js": "^0.4.23"
   }
 }

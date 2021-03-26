@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const Store = require('./utils/store.js');
 const AirportsDB = require('./utils/airportsdb.js');
+const SimbriefImport = require('./utils/simbriefimport.js');
 
 const store = new Store({
     configName: 'flymap-user-preferences',
@@ -113,6 +114,11 @@ app.on('ready', () => {
         let zoom = store.get('zoom');
 
         return zoom;
+    });
+
+    ipcMain.handle('getsimbriefplan', (event, arg) => {
+        var importer = new SimbriefImport(342019);
+        return importer.parsePlan();
     });
 
     mainWindow.on('ready-to-show', () => {

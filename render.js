@@ -4,6 +4,8 @@ const { ipcRenderer, BrowserWindow, remote } = require('electron');
 
 var airports = [];
 var hasAirports = false;
+var activeplan = null;
+var activeTheme = 'light';
 const searchVal = document.getElementById('searchval');
 
 searchVal.addEventListener('keyup', function(event) {
@@ -21,7 +23,7 @@ searchVal.addEventListener('keyup', function(event) {
         var results = [].concat(idents, iata, names);
         var resultsdedup = [];
         results.forEach(el => {
-            if(resultsdedup.filter(r => r.ident.toLowerCase().includes(el.ident.toLowerCase())).length == 0) {
+            if (resultsdedup.filter(r => r.ident.toLowerCase().includes(el.ident.toLowerCase())).length == 0) {
                 resultsdedup.push(el);
             }
         });
@@ -46,7 +48,7 @@ searchVal.addEventListener('keyup', function(event) {
                 var lng = r.getAttribute('data-lng');
                 map.setCenter({ 'lat': lat, 'lng': lng });
                 map.setZoom(14);
-    
+
                 /* hide results */
                 resultsBox.setAttribute('style', 'display: none;');
                 searchVal.value = '';
@@ -55,10 +57,10 @@ searchVal.addEventListener('keyup', function(event) {
                 var center = { lat: map.getCenter().lat, lng: map.getCenter().lng };
 
                 ipcRenderer.send('positionchange', center);
-            
+
                 /* save zoom as it might change when panning */
                 var zoom = map.getZoom();
-            
+
                 ipcRenderer.send('zoomchange', zoom);
             });
         });
@@ -87,6 +89,7 @@ var darkTheme = 'assets/mapstyles/Dark_Map.json';
 const btnTheme = document.getElementById('themebtn');
 ipcRenderer.invoke('themeset', '').then((result) => {
     map.setStyle(result === 'light' ? lightTheme : darkTheme);
+    activeTheme = result;
     btnTheme.setAttribute('class', result);
     btnTheme.setAttribute('src', result === 'light' ? 'assets/sun.svg' : 'assets/moon.svg');
 });
@@ -151,10 +154,14 @@ btnTheme.addEventListener('click', function() {
         this.setAttribute('class', 'dark');
         this.setAttribute('src', 'assets/moon.svg');
         map.setStyle(darkTheme);
+        activeTheme = 'dark';
+        drawRoute();
     } else {
         this.setAttribute('class', 'light');
         this.setAttribute('src', 'assets/sun.svg');
         map.setStyle(lightTheme);
+        activeTheme = 'light';
+        drawRoute();
     }
 
     /* save theme setting */
@@ -196,20 +203,130 @@ document.getElementById("settingsclose").addEventListener("click", function(e) {
     document.getElementById("settingsdialog").style.display = 'none';
 });
 
+/* flightplan dialog */
+document.getElementById("flightplandialog").style.display = 'none';
+document.getElementById("plan").addEventListener("click", function(e) {
+    if (document.getElementById("flightplandialog").style.display === 'none') {
+        document.getElementById("flightplandialog").style.display = 'block';
+    } else {
+        document.getElementById("flightplandialog").style.display = 'none';
+    }
+});
+
+document.getElementById("flightplanclose").addEventListener("click", function(e) {
+    document.getElementById("flightplandialog").style.display = 'none';
+});
+
+/* simbrief import */
+document.getElementById("importsimbrief").addEventListener("click", function(e) {
+    ipcRenderer.invoke('getsimbriefplan', '').then((result) => {
+        activeplan = result;
+
+        drawRoute();
+    });
+});
+
+function drawRoute() {
+    /* drawing the flight plan lines */
+    if (!activeplan) return;
+
+    var waypoints = {
+        'type': 'FeatureCollection',
+        'features': []
+    };
+    var coords = [];
+    coords.push([activeplan.OFP.origin[0].pos_long, activeplan.OFP.origin[0].pos_lat]);
+    activeplan.OFP.navlog[0].fix.forEach(fix => {
+        waypoints.features.push({
+            'type': 'Feature',
+            'properties': {
+                'description': fix.name,
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [fix.pos_long, fix.pos_lat]
+            }
+        });
+        coords.push([fix.pos_long, fix.pos_lat]);
+    });
+    /* draw lines */
+    if (map.getLayer('route') || map.getLayer('waypoints')) {
+        map.removeImage('waypoint');
+        map.removeLayer('waypoints');
+        map.removeSource('waypoints');
+        map.removeLayer('route');
+        map.removeSource('route');
+    }
+    map.loadImage(
+        'assets/diamonds.png',
+        function(error, image) {
+            if (error) throw error;
+            map.addImage('waypoint', image);
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': coords
+                    }
+                }
+            });
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': 'rgba(255, 112, 0, 0.6)',
+                    'line-width': 6
+                }
+            });
+            map.addSource('waypoints', {
+                'type': 'geojson',
+                'data': waypoints
+            });
+            map.addLayer({
+                'id': 'waypoints',
+                'type': 'symbol',
+                'source': 'waypoints',
+                'layout': {
+                    'text-field': '{description}',
+                    'text-size': 10,
+                    'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                    'text-justify': 'auto',
+                    'text-radial-offset': 0.5,
+                    'icon-size': 0.4,
+                    'icon-image': 'waypoint'
+                },
+                'paint': {
+                    'text-color': (activeTheme === 'light' ? '#000000' : '#ffffff'),
+                    'text-halo-color': '#242424',
+                    'icon-color': '#ffffff'
+                }
+            });
+        }
+    );
+}
+
 /* set window state */
 document.onreadystatechange = function() {
     if (document.readyState == "complete") {
         /* utc time */
         var d = new Date();
-        var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
+        var n = (d.getUTCHours() < 10 ? '0' : '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0' : '') + d.getUTCMinutes() + 'Z';
         document.getElementById('utctime').innerText = n;
-    
+
         window.setInterval(function() {
                 var d = new Date();
-                var n = (d.getUTCHours() < 10 ? '0': '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0': '') + d.getUTCMinutes() + 'Z';
+                var n = (d.getUTCHours() < 10 ? '0' : '') + d.getUTCHours() + ':' + (d.getUTCMinutes() < 10 ? '0' : '') + d.getUTCMinutes() + 'Z';
                 document.getElementById('utctime').innerText = n;
-        }, 
-        1000);
+            },
+            1000);
 
         remote.BrowserWindow.getFocusedWindow().on('maximize', () => {
             document.getElementById('max-text').setAttribute('style', 'display: none;');
@@ -254,6 +371,9 @@ ipcRenderer.on('airportdata', (event, arg) => {
             .setPopup(popup);
         el.addEventListener('mouseenter', () => { if (!marker.getPopup().isOpen()) { marker.togglePopup(); } });
         el.addEventListener('mouseleave', () => { if (marker.getPopup().isOpen()) { marker.togglePopup(); } });
-        el.addEventListener('click', () => { map.setCenter(marker.getLngLat()); map.setZoom(14); })
+        el.addEventListener('click', () => {
+            map.setCenter(marker.getLngLat());
+            map.setZoom(14);
+        })
     });
 });
