@@ -35,7 +35,7 @@ body {
     position: relative;
     float: left;
     width: 250px;
-    padding: 0 20px 17px 15px;
+    padding: 0 20px 17px 0;
     margin: 23px 5px 0;
     -webkit-app-region: no-drag;
     -webkit-user-select: none; 
@@ -106,6 +106,20 @@ body {
 
 #searchresults .result .ident {
     color: #888;
+}
+
+#search {
+    display: block;
+    float: left;
+    padding: 0 0 17px 12px;
+    margin: 24px 5px 0;
+    -webkit-app-region: no-drag;
+}
+
+#search img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 #settings {
@@ -283,4 +297,68 @@ body {
     margin: 0;
     text-align: center;
     font-weight: normal;
+}
+
+.mapboxgl-popup-content hr {
+    border: none;
+    border-bottom: 1px solid #888;
+    color: transparent;
+}
+.mapboxgl-popup-content span {
+    color: #888;
+    text-align: center;
+    display: block;
+}
+
+#settingsdialog {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #343434;
+    z-index: 5;
+    color: #fff;
+    padding: 30px 50px;
+    font-size: 18px;
+    cursor: default;
+    font-family: Muli, sans-serif;
+    font-weight: normal;
+    border-top: 1px solid #666;
+}
+
+#settingsdialog h4 {
+    font-size: 24px;
+    cursor: default;
+    font-family: Muli, sans-serif;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+#settingsdialog .close {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    border-radius: 150px;
+    border: 1px solid #fff;
+    padding: 0;
+    margin: 0;
+}
+
+#settingsdialog .close button {
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    font-family: "MDL2";
+    font-size: 10px;
+    cursor: pointer;
 }

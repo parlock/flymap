@@ -12,6 +12,7 @@
 
 <body>
     <div id="navbar">
+        <div id="search"><img src="assets/search.svg" /></div>
         <div id="searchbox">
             <input id="searchval" type="text" value="" placeholder="search airports..."><div id="clearsearch" title="clear search">X</div></input>
         </div>
@@ -33,6 +34,12 @@
         <div id="map"></div>
         <p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a
                 href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></p>
+
+        <div id="settingsdialog">
+            <div class="close"><button id="settingsclose">&#xE8BB;</button></div>
+            <h4>Settings</h4>
+            <p>Simbrief User ID: <input type="text" id="simbriefid" value="" /></p>
+        </div>
     </div>
 
     <script src="render.js"></script>

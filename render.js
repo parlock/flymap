@@ -182,6 +182,20 @@ document.getElementById("close-btn").addEventListener("click", function(e) {
     window.close();
 });
 
+/* settings dialog */
+document.getElementById("settingsdialog").style.display = 'none';
+document.getElementById("settings").addEventListener("click", function(e) {
+    if (document.getElementById("settingsdialog").style.display === 'none') {
+        document.getElementById("settingsdialog").style.display = 'block';
+    } else {
+        document.getElementById("settingsdialog").style.display = 'none';
+    }
+});
+
+document.getElementById("settingsclose").addEventListener("click", function(e) {
+    document.getElementById("settingsdialog").style.display = 'none';
+});
+
 /* set window state */
 document.onreadystatechange = function() {
     if (document.readyState == "complete") {
@@ -225,7 +239,7 @@ ipcRenderer.on('airportdata', (event, arg) => {
     hasAirports = true;
 
     /* process airport markers on map */
-    arg.filter(a => a.type === 'large_airport' && !a.name.includes('Base') && !a.name.includes('Regional')).forEach(element => {
+    arg.filter(a => a.type === 'large_airport' && !a.name.includes('Base') && !a.name.includes('Regional') && !a.name.includes('RAF')).forEach(element => {
         var el = document.createElement('div');
         el.className = 'airport';
         var popup = new mapboxgl.Popup({
@@ -233,12 +247,13 @@ ipcRenderer.on('airportdata', (event, arg) => {
             closeOnClick: false,
             closeOnMove: true,
             focusAfterOpen: false
-        }).setHTML('<h4>' + element.name + '</h4><h2>' + element.ident + (element.iata_code !== '' ? '/' + element.iata_code : '') + '</h2>');
+        }).setHTML('<h4>' + element.name + '</h4><h2>' + element.ident + (element.iata_code !== '' ? '/' + element.iata_code : '') + '</h2><hr/><span>Click to goto</span>');
         var marker = new mapboxgl.Marker(el)
             .setLngLat([element.longitude_deg, element.latitude_deg])
             .addTo(map)
             .setPopup(popup);
         el.addEventListener('mouseenter', () => { if (!marker.getPopup().isOpen()) { marker.togglePopup(); } });
         el.addEventListener('mouseleave', () => { if (marker.getPopup().isOpen()) { marker.togglePopup(); } });
+        el.addEventListener('click', () => { map.setCenter(marker.getLngLat()); map.setZoom(14); })
     });
 });
