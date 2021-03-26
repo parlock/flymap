@@ -171,7 +171,7 @@ document.getElementById("min-btn").addEventListener("click", function(e) {
 document.getElementById("max-btn").addEventListener("click", function(e) {
     var window = remote.BrowserWindow.getFocusedWindow();
     if (window.isMaximized()) {
-        window.restore();
+        window.unmaximize();
     } else {
         window.maximize();
     }
