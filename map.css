@@ -38,7 +38,7 @@ body {
     padding: 0 20px 17px 0;
     margin: 23px 5px 0;
     -webkit-app-region: no-drag;
-    -webkit-user-select: none; 
+    -webkit-user-select: none;
 }
 
 #searchbox div {
@@ -47,16 +47,20 @@ body {
     font-size: 14px;
     background-color: #545454;
     color: #fff;
-    -webkit-user-select: none; 
+    -webkit-user-select: none;
 }
 
 #searchbox input {
     width: 100%;
     cursor: text;
+    font-family: Muli, sans-serif;
+    font-size: 14px;
 }
+
 #searchbox input:focus {
     cursor: text;
 }
+
 #clearsearch {
     position: absolute;
     right: 15px;
@@ -266,18 +270,23 @@ body {
     color: #fff;
     background-color: rgba(52, 52, 52, 0.9);
 }
+
 .mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
     border-bottom-color: rgba(52, 52, 52, 0.9) !important;
 }
+
 .mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
     border-left-color: rgba(52, 52, 52, 0.9) !important;
 }
+
 .mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
     border-right-color: rgba(52, 52, 52, 0.9) !important;
 }
+
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
     border-top-color: rgba(52, 52, 52, 0.9) !important;
 }
+
 .mapboxgl-popup-content h4 {
     font-family: Muli, sans-serif;
     font-size: 16px;
@@ -291,6 +300,7 @@ body {
     text-overflow: ellipsis;
     text-align: center;
 }
+
 .mapboxgl-popup-content h2 {
     font-family: Muli, sans-serif;
     font-size: 16px;
@@ -304,6 +314,7 @@ body {
     border-bottom: 1px solid #888;
     color: transparent;
 }
+
 .mapboxgl-popup-content span {
     color: #888;
     text-align: center;
