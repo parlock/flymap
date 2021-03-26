@@ -2,7 +2,6 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const Store = require('./utils/store.js');
 const AirportsDB = require('./utils/airportsdb.js');
 
-
 const store = new Store({
     configName: 'flymap-user-preferences',
     defaults: {
@@ -121,6 +120,8 @@ app.on('ready', () => {
 
         // send airport data to renderer
         mainWindow.webContents.send('airportdata', airportsDB.get());
+
+        // TEST SIM UDP
     });
 
     // load a website to display
