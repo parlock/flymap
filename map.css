@@ -39,6 +39,7 @@ body {
     margin: 23px 5px 0;
     -webkit-app-region: no-drag;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 #searchbox div {
@@ -48,6 +49,7 @@ body {
     background-color: #545454;
     color: #fff;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 #searchbox input {
@@ -197,6 +199,7 @@ body {
     z-index: 3;
     border-bottom-left-radius: 8px;
     -webkit-user-select: none;
+    user-select: none;
     display: none;
 }
 
