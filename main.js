@@ -32,6 +32,7 @@ app.on('ready', () => {
         minWidth: 1280,
         minHeight: 768,
         backgroundColor: '#191a1a',
+        icon: 'assets/flymap.ico',
         frame: false,
         show: true,
         paintWhenInitiallyHidden: true,
